@@ -12,7 +12,8 @@ on:
 
 env:
   REGISTRY: crpi-pakm1z61vqp8x59k.cn-hangzhou.personal.cr.aliyuncs.com
-  IMAGE_NAME: ${{ github.repository }}
+  NAMESPACE: nilpotenter
+  IMAGE_NAME: docker-ghcr-push
 
 jobs:
   build-and-push:
