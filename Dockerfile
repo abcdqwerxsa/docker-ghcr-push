@@ -6,7 +6,6 @@ WORKDIR /app
 # 复制package.json并安装依赖（如果是Node.js项目）
 # COPY package*.json ./
 # RUN npm install
-
 # 复制源代码
 COPY . .
 
