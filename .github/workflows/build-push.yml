@@ -5,6 +5,8 @@ on:
     branches:
       - master
       - main
+    tags:
+      - 'v*.*.*'
   pull_request:
     branches:
       - master
@@ -40,9 +42,13 @@ jobs:
       with:
         images: ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}
         tags: |
-          type=ref,event=branch
-          type=ref,event=pr
-          type=sha,prefix={{branch}}-
+          # 语义化版本标签 (v1.2.3 -> 1.2.3)
+          type=semver,pattern={{version}}
+          # 主版本标签 (v1.2.3 -> 1)
+          type=semver,pattern={{major}}
+          # 主次版本标签 (v1.2.3 -> 1.2)
+          type=semver,pattern={{major}}.{{minor}}
+          # latest标签 (仅tag推送时)
           type=raw,value=latest,enable={{is_default_branch}}
     
     - name: Build and push Docker image
